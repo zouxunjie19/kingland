@@ -1,0 +1,18 @@
+<div class="p-mt-5">
+  <div class="">
+    <p class="">发布通知</p>
+    <textarea pInputTextarea name="noticeContext" [(ngModel)]="noticeContext" style="width: 100%" [rows]="5"></textarea>
+    <button pButton type="button" label="发布通知" icon="pi pi-send" class="p-button-sm" (click)="onRequest()"></button>
+  </div>
+  <div class="">
+    <div class="dialogueList p-mt-5">
+      <p class="">通知列表</p>
+      <div class="" *ngFor="let item of noticeList" style="margin-bottom: 10px">
+        <p-panel header="{{item['noticeTime']}}" >
+          {{item['noticeContext']}}
+        </p-panel>
+      </div>
+
+    </div>
+  </div>
+</div>

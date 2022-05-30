@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kingland.neusoft.course.mapper.NoticeMapper">
+  <resultMap id="BaseResultMap" type="com.kingland.neusoft.course.mapper.dao.Notice">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="notice_context" jdbcType="VARCHAR" property="noticeContext" />
+    <result column="notice_time" jdbcType="TIMESTAMP" property="noticeTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, notice_context, notice_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user_access."notice"
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user_access."notice"
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <select id="count" resultType="java.lang.Integer">
+    select count(*)
+    from user_access."notice"
+  </select>
+  <select id="query" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from user_access."notice"
+  </select>
+  <insert id="insert"  keyColumn="id" keyProperty="id" parameterType="com.kingland.neusoft.course.mapper.dao.Notice">
+    insert into user_access."notice" (notice_context, notice_time
+      )
+    values (#{noticeContext,jdbcType=VARCHAR}, #{noticeTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.kingland.neusoft.course.mapper.dao.Notice">
+    insert into user_access."notice"
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="noticeContext != null">
+        notice_context,
+      </if>
+      <if test="noticeTime != null">
+        notice_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="noticeContext != null">
+        #{noticeContext,jdbcType=VARCHAR},
+      </if>
+      <if test="noticeTime != null">
+        #{noticeTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.kingland.neusoft.course.mapper.dao.Notice">
+    update user_access."notice"
+    <set>
+      <if test="noticeContext != null">
+        notice_context = #{noticeContext,jdbcType=VARCHAR},
+      </if>
+      <if test="noticeTime != null">
+        notice_time = #{noticeTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.kingland.neusoft.course.mapper.dao.Notice">
+    update user_access."notice"
+    set notice_context = #{noticeContext,jdbcType=VARCHAR},
+      notice_time = #{noticeTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
